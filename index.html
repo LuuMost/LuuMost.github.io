@@ -110,6 +110,7 @@
   .one-sentence b{color:var(--text);font-weight:600}
 
   /* ad slot placeholders — replaced with real ad code in step 7 */
+  .ad-slot[data-empty="1"]{display:none}
   .ad-slot{
     margin:22px auto;max-width:728px;min-height:90px;
     border:1px dashed var(--line);border-radius:10px;
@@ -222,8 +223,8 @@
   <p class="one-sentence">This is a <b>free one-page link safety checker</b> for <b>anyone who received a suspicious link by email, SMS or WhatsApp</b> that <b>breaks the address into its parts, shows the real domain, looks up how long ago that domain was registered and when it expires, and lists the phishing red flags it finds.</b></p>
 </header>
 
-<!-- AD SLOT 1 — paste your Adsterra or Monetag code between these comments (step 7) -->
-<div class="wrap"><div class="ad-slot">Ad slot 1 — above the button</div></div>
+<!-- AD SLOT 1 — Adsterra Social Bar. Remove data-empty="1" when a code is placed here. -->
+<div class="wrap"><div class="ad-slot" data-adslot="1" data-empty="1"></div></div>
 
 <main class="wrap">
   <div class="card">
@@ -320,8 +321,8 @@
   </div>
 </main>
 
-<!-- AD SLOT 2 — paste your second ad unit here (step 7) -->
-<div class="wrap"><div class="ad-slot">Ad slot 2 — below the tool</div></div>
+<!-- AD SLOT 2 — Adsterra Native Banner. Remove data-empty="1" when a code is placed here. -->
+<div class="wrap"><div class="ad-slot" data-adslot="2" data-empty="1"></div></div>
 
 <footer class="wrap">
   LinkWary · free link safety checker · no account, no download, no uploaded links<br>
