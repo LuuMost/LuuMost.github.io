@@ -66,7 +66,7 @@
     {
       "@type": "Question",
       "name": "Does this tool upload the links I check?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. The URL breakdown and all the warning-sign checks run inside your own browser, so the link you paste is never sent to this website's server. The only external request is a lookup to the public RDAP registry service to fetch the domain's registration date, expiry date and registrar, and that request contains only the domain name itself — not the full link, not any path, not any query string." }
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The URL breakdown and all the warning-sign checks run inside your own browser, so the link you paste is never sent to this website's server. The one request made on your behalf is a lookup to the public RDAP registry service to fetch the domain's registration date, expiry date and registrar, and that request contains only the domain name itself — not the full link, not any path, not any query string. This page also displays advertising served by a third-party network, which loads its own scripts and cookies; the pasted link is not shared with it." }
     },
     {
       "@type": "Question",
@@ -111,13 +111,8 @@
 
   /* ad slot placeholders — replaced with real ad code in step 7 */
   .ad-slot[data-empty="1"]{display:none}
-  .ad-slot{
-    margin:22px auto;max-width:728px;min-height:90px;
-    border:1px dashed var(--line);border-radius:10px;
-    display:flex;align-items:center;justify-content:center;
-    color:var(--dimmer);font-family:var(--mono);font-size:11px;letter-spacing:.12em;
-    background:var(--panel2);text-transform:uppercase
-  }
+  .ad-slot{margin:22px auto;max-width:728px;text-align:center;overflow:hidden}
+  .ad-slot iframe,.ad-slot img,.ad-slot ins,.ad-slot div{max-width:100%}
 
   .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:20px}
   form{display:flex;gap:10px;flex-wrap:wrap}
@@ -223,8 +218,11 @@
   <p class="one-sentence">This is a <b>free one-page link safety checker</b> for <b>anyone who received a suspicious link by email, SMS or WhatsApp</b> that <b>breaks the address into its parts, shows the real domain, looks up how long ago that domain was registered and when it expires, and lists the phishing red flags it finds.</b></p>
 </header>
 
-<!-- AD SLOT 1 — Adsterra Social Bar. Remove data-empty="1" when a code is placed here. -->
-<div class="wrap"><div class="ad-slot" data-adslot="1" data-empty="1"></div></div>
+<!-- AD SLOT 1 — Adsterra ad unit 1. Live. -->
+<div class="wrap"><div class="ad-slot" data-adslot="1">
+  <!-- Adsterra ad unit 1 -->
+  <script data-cfasync="false" src="https://abscloud.org/1/c1ef1b585dd73161a6494bd83d1f75c0"></script>
+</div></div>
 
 <main class="wrap">
   <div class="card">
@@ -308,7 +306,7 @@
     <p>Find the real domain by reading backwards from the first single slash. Then check the domain's age in the public registry. Then look for a copied brand name, a swapped character, a raw IP address, or an unencrypted connection on a page that asks for a password. If two or more of those appear together, treat the link as hostile.</p>
 
     <h3>Does this checker upload the links I paste?</h3>
-    <p>No. The address is broken apart and checked inside your own browser using JavaScript on this page. The only network request is a lookup of the registered domain name against the public RDAP directory to obtain its registration and expiry dates. The path, the query string and any tokens in your link are never transmitted.</p>
+    <p>No. The address is broken apart and checked inside your own browser using JavaScript on this page. The lookup of the registered domain name against the public RDAP directory is the only request this page makes on your behalf. The path, the query string and any tokens in your link are never transmitted &mdash; not to us, not to anyone. The advertising network used on this page loads its own files and sets its own cookies, but the link you paste is never part of that; see the <a href="privacy.html">privacy policy</a> for the detail.</p>
 
     <h3>Are URL shorteners dangerous?</h3>
     <p>Not by themselves, but they hide the destination, which is what an attacker wants. Expand a shortened link before trusting it. Several shortening services reveal the target when you append a plus sign to the address.</p>
@@ -321,8 +319,12 @@
   </div>
 </main>
 
-<!-- AD SLOT 2 — Adsterra Native Banner. Remove data-empty="1" when a code is placed here. -->
-<div class="wrap"><div class="ad-slot" data-adslot="2" data-empty="1"></div></div>
+<!-- AD SLOT 2 — Adsterra ad unit 2. Live. -->
+<div class="wrap"><div class="ad-slot" data-adslot="2">
+  <!-- Adsterra ad unit 2 -->
+  <script async="async" data-cfasync="false" src="https://bauval.org/21/294c9912d0cbde1fc0a330a417066e78"></script>
+  <div id="container-294c9912d0cbde1fc0a330a417066e78"></div>
+</div></div>
 
 <footer class="wrap">
   LinkWary · free link safety checker · no account, no download, no uploaded links<br>
