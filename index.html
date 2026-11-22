@@ -1,917 +1,447 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Is This Link Safe? Free URL Safety Checker — LinkWary</title>
-<meta name="description" content="Paste any link and see if it is safe. LinkWary shows you the real domain hidden in the URL, how old the domain is, whether it is about to expire, and every phishing warning sign — free, no signup, nothing is uploaded.">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-<!-- Google Search Console verification. Do not remove once verified. -->
-<meta name="google-site-verification" content="APE_2vUA0BOmN5SU2fYjnnTZaeLkFuF0Dy5BDbA0CGc" />
-<link rel="canonical" href="https://luumost.github.io/">
-
-<!-- Open Graph: how the link looks when shared on WhatsApp, X, Facebook, TikTok -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Is This Link Safe? Free URL Safety Checker">
-<meta property="og:description" content="Paste a suspicious link. See the real domain, the domain's age, and every phishing red flag. Free, no signup.">
-<meta property="og:url" content="https://luumost.github.io/">
-<meta property="og:site_name" content="LinkWary">
-<meta property="og:image" content="https://luumost.github.io/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="LinkWary flagging a fake PayPal link as DANGER SIGNS, underlining secure-login.xyz as the address you would really be visiting.">
-<meta property="og:locale" content="en_ZA">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Is This Link Safe? Free URL Safety Checker">
-<meta name="twitter:description" content="Paste a suspicious link. See the real domain, the domain's age, and every phishing red flag. Free, no signup.">
-<meta name="twitter:image" content="https://luumost.github.io/og.png">
-<meta name="twitter:image:alt" content="DANGER SIGNS - the real destination is secure-login.xyz, not paypal.com">
-
-<!-- Plain-text facts for AI assistants (ChatGPT, Perplexity, Gemini) to read and quote -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "LinkWary — Is This Link Safe?",
-  "applicationCategory": "SecurityApplication",
-  "operatingSystem": "Any web browser",
-  "url": "https://luumost.github.io/",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "A free one-page link safety checker. You paste a URL and it breaks the address into its parts, highlights the real domain, looks up when that domain was registered and when it expires using public RDAP registry data, and checks for common phishing signs such as lookalike brand names, fake characters, IP addresses, unusual ports, hidden usernames and URL shorteners. No account, no download, and the link you check is never uploaded to a server.",
-  "featureList": [
-    "URL anatomy breakdown that highlights the real domain",
-    "Domain age lookup from public registry (RDAP) data",
-    "Domain expiry and short-lifetime registration warning",
-    "Typosquatting check against 40 well-known brand names",
-    "Lookalike character and punycode detection",
-    "IP address, unusual port, hidden username and shortener detection",
-    "Clear verdict: Looks safe, Be careful, or Danger signs"
-  ],
-  "isAccessibleForFree": true
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How do I know if a link is safe before clicking it?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Look at the real domain, which is the part of the address just before the first single slash. Ignore everything to the left of it, because scammers hide fake brand names in subdomains like paypal.secure-login.example.com — the real site there is example.com, not PayPal. Then check how old the domain is. Domains registered in the last 30 days are used in most phishing campaigns, because scammers buy them cheap, use them for a few weeks, and abandon them. Finally check the expiry date: a domain registered recently that also expires within a year was probably bought for one short campaign." }
-    },
-    {
-      "@type": "Question",
-      "name": "What is domain age and why does it matter for phishing?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Domain age is how long ago a web address was first registered. The registration date is public record in the domain registry, published through a free protocol called RDAP. It matters because legitimate banks, shops and services usually own domains that are many years old, while phishing and scam sites overwhelmingly use domains registered days or weeks earlier. A brand-new domain pretending to be a well-known company is one of the strongest warning signs available without any special software." }
-    },
-    {
-      "@type": "Question",
-      "name": "Does this tool upload the links I check?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. The URL breakdown and all the warning-sign checks run inside your own browser, so the link you paste is never sent to this website's server. The one request made on your behalf is a lookup to the public RDAP registry service to fetch the domain's registration date, expiry date and registrar, and that request contains only the domain name itself — not the full link, not any path, not any query string. This page also displays advertising served by a third-party network, which loads its own scripts and cookies; the pasted link is not shared with it." }
-    },
-    {
-      "@type": "Question",
-      "name": "Can a link look safe here and still be a scam?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. This tool checks structural warning signs and public registration data. It cannot scan the destination website for malware, it cannot see whether a page is a fake login form, and it cannot check a real-time blacklist of known malicious addresses. A domain that is ten years old can still be hacked and used to serve bad content. Treat a clean result as 'no obvious structural red flags', not as a guarantee, and keep antivirus software and browser warnings enabled." }
-    },
-    {
-      "@type": "Question",
-      "name": "Are URL shorteners like bit.ly dangerous?",
-      "acceptedAnswer": { "@type": "Answer", "text": "A shortener is not dangerous by itself, but it hides the real destination, which is exactly what a phishing attacker wants. If you receive an unsolicited shortened link, expand it first. Most shorteners will show you the target if you add a plus sign or a tilde to the end of the address, or you can paste the shortened link into this tool and follow the expanded destination through a second check." }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fafaf8" />
+  <meta name="description" content="Richard Lutendo Mudau is an aspiring professional software developer in Pretoria, South Africa, building with JavaScript, React, Python, SQL and cloud technologies." />
+  <title>Richard Lutendo Mudau — Aspiring Software Developer</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #fafaf8;
+      --bg-soft: #f1f0ec;
+      --card: #ffffff;
+      --card-raised: #f1f0ec;
+      --ink: #1a1a1a;
+      --muted: #6b6b66;
+      --line: #e6e4de;
+      --accent: #c95b31;
+      --mint: #c95b31;
+      --amber: #c95b31;
+      --max: 1160px;
+      --radius: 22px;
     }
-  ]
-}
-</script>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 83% 3%, rgba(201, 91, 49, .055), transparent 33rem),
+        radial-gradient(ellipse at 0% 46%, rgba(201, 91, 49, .035), transparent 28rem),
+        var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 5px; }
+    .wrap { width: min(var(--max), calc(100% - 44px)); margin-inline: auto; }
+    .skip-link { position: absolute; left: -9999px; top: 12px; z-index: 20; background: var(--accent); color: #fff; padding: 10px 14px; border-radius: 8px; font-weight: 800; }
+    .skip-link:focus { left: 12px; }
 
-<style>
-  :root{
-    --bg:#0b0f14; --panel:#121821; --panel2:#0e141c; --line:#212c3a;
-    --text:#e8eef5; --dim:#93a4b8; --dimmer:#657789;
-    --safe:#3ecf8e; --warn:#f5b544; --bad:#ff5d5d; --accent:#5aa9ff;
-    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
-  }
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0;background:var(--bg);color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.6;
-  }
-  .wrap{max-width:760px;margin:0 auto;padding:0 18px}
-  header{padding:34px 0 6px;text-align:center}
-  .brand{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--dimmer);text-transform:uppercase}
-  h1{font-size:clamp(27px,6.4vw,42px);line-height:1.14;margin:12px 0 0;letter-spacing:-.02em}
-  .lede{color:var(--dim);font-size:clamp(15px,3.8vw,17px);margin:12px auto 0;max-width:56ch}
+    /* Header */
+    .site-header { position: sticky; top: 0; z-index: 10; background: rgba(250, 250, 248, .88); border-bottom: 1px solid var(--line); backdrop-filter: blur(16px); }
+    .header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 750; letter-spacing: -.02em; white-space: nowrap; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); background: var(--bg-soft); font-family: Georgia, "Times New Roman", serif; font-size: .8rem; font-weight: 900; letter-spacing: -.05em; }
+    .brand-copy { display: grid; line-height: 1.2; }
+    .brand-copy small { color: var(--muted); font-size: .69rem; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; margin-top: 4px; }
+    .nav { display: flex; align-items: center; gap: clamp(15px, 2.4vw, 31px); }
+    .nav a { color: #6b6b66; text-decoration: none; font-size: .88rem; transition: color .18s ease; }
+    .nav a:hover { color: var(--accent); }
+    .header-cta { color: var(--accent) !important; border: 1px solid rgba(201, 91, 49, .35); padding: 9px 15px; border-radius: 999px; }
+    .mobile-nav { display: none; position: relative; }
+    .mobile-nav summary { list-style: none; cursor: pointer; color: var(--accent); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; font-size: .85rem; }
+    .mobile-nav summary::-webkit-details-marker { display: none; }
+    .mobile-nav nav { position: absolute; right: 0; top: 48px; min-width: 190px; display: grid; gap: 4px; padding: 12px; border: 1px solid var(--line); border-radius: 14px; background: #ffffff; box-shadow: 0 16px 44px rgba(26,26,26,.12); }
+    .mobile-nav a { text-decoration: none; padding: 8px 10px; color: var(--ink); border-radius: 8px; }
+    .mobile-nav a:hover { background: var(--card-raised); }
 
-  /* one-sentence plain-text description, required by the method */
-  .one-sentence{
-    margin:22px auto 0;max-width:62ch;font-size:15px;color:var(--dim);
-    border-left:2px solid var(--line);padding-left:14px;text-align:left
-  }
-  .one-sentence b{color:var(--text);font-weight:600}
+    /* Shared */
+    .section { padding: 94px 0; border-top: 1px solid var(--line); }
+    .section-heading { max-width: 700px; margin-bottom: 36px; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--accent); font-size: .76rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 25px; height: 1px; background: currentColor; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; }
+    h2 { margin: 12px 0 10px; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.1; letter-spacing: -.055em; }
+    .section-intro { color: var(--muted); max-width: 650px; margin-bottom: 0; }
+    .pill { display: inline-flex; align-items: center; gap: 7px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; color: #6b6b66; font-size: .75rem; line-height: 1.3; }
+    .pill .dot { width: 6px; height: 6px; border-radius: 100%; background: var(--accent); }
+    .button-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 11px 17px; border-radius: 999px; text-decoration: none; font-size: .9rem; font-weight: 750; transition: transform .18s ease, background .18s ease, border-color .18s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--ink); color: #fff; }
+    .button-primary:hover { background: var(--accent); }
+    .button-secondary { color: var(--ink); border: 1px solid var(--line); background: rgba(26,26,26,.02); }
+    .button-secondary:hover { border-color: rgba(201,91,49,.48); }
+    .arrow { font-size: 1.08em; }
 
-  /* ad slot placeholders — replaced with real ad code in step 7 */
-  .ad-slot[data-empty="1"]{display:none}
-  .ad-slot{margin:22px auto;max-width:728px;text-align:center;overflow:hidden}
-  .ad-slot iframe,.ad-slot img,.ad-slot ins,.ad-slot div{max-width:100%}
+    /* Hero */
+    .hero { padding: 91px 0 88px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr); align-items: center; gap: clamp(36px, 8vw, 100px); }
+    .hero-status { margin-bottom: 24px; }
+    h1 { max-width: 760px; margin: 16px 0 20px; font-size: clamp(3.2rem, 7vw, 6.15rem); line-height: .98; letter-spacing: -.078em; font-weight: 790; }
+    h1 .accent { color: var(--accent); }
+    .hero-role { max-width: 680px; font-size: clamp(1.16rem, 2.4vw, 1.48rem); line-height: 1.5; color: #1a1a1a; margin-bottom: 13px; }
+    .hero-text { max-width: 630px; color: var(--muted); font-size: 1.02rem; margin-bottom: 27px; }
+    .hero .button-row { margin-bottom: 30px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 19px; color: var(--muted); font-size: .85rem; }
+    .meta-item { display: inline-flex; align-items: center; gap: 8px; }
+    .meta-icon { color: var(--mint); font-size: 1rem; }
+    .hero-art { min-height: 440px; position: relative; display: grid; place-items: center; isolation: isolate; }
+    .art-grid { position: absolute; inset: 4% 0 3%; z-index: -1; opacity: .3; background-image: linear-gradient(rgba(201,91,49,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(201,91,49,.08) 1px, transparent 1px); background-size: 38px 38px; mask-image: radial-gradient(ellipse, black 16%, transparent 74%); }
+    .orbit { position: absolute; width: 360px; height: 360px; border: 1px solid rgba(201,91,49,.14); border-radius: 50%; transform: rotate(-18deg) scaleY(.58); }
+    .orbit::before, .orbit::after { content: ""; position: absolute; border: 1px solid rgba(201,91,49,.09); border-radius: 50%; inset: 20px -24px; transform: rotate(40deg); }
+    .orbit::after { inset: 52px -52px; transform: rotate(-68deg); }
+    .code-card { width: min(100%, 425px); position: relative; padding: 20px; border: 1px solid rgba(26,26,26,.12); border-radius: 20px; background: linear-gradient(145deg, rgba(255,255,255,.99), rgba(241,240,236,.98)); box-shadow: 0 26px 80px rgba(26,26,26,.10), 0 0 50px rgba(201,91,49,.06); transform: rotate(1.2deg); }
+    .code-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid var(--line); color: var(--muted); font: 500 .72rem/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .window-dots { display: flex; gap: 5px; }
+    .window-dots i { width: 7px; height: 7px; border-radius: 50%; background: #d8d6d0; }
+    .window-dots i:first-child { background: var(--amber); }
+    .code-body { padding: 20px 2px 10px; font: 500 clamp(.76rem, 1.2vw, .9rem)/1.9 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #4b4b46; }
+    .code-line { white-space: nowrap; }
+    .code-indent { padding-left: 22px; }
+    .code-key { color: #c95b31; }
+    .code-string { color: #95503a; }
+    .code-comment { color: #6b6b66; }
+    .code-func { color: #8e422b; }
+    .code-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
+    .online { display: inline-flex; align-items: center; gap: 7px; color: #6b6b66; }
+    .online::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px rgba(201,91,49,.5); }
+    .floating-card { position: absolute; right: -8px; bottom: 40px; padding: 13px 16px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.98); box-shadow: 0 16px 35px rgba(26,26,26,.10); font-size: .79rem; color: #6b6b66; }
+    .floating-card strong { color: var(--accent); display: block; font-size: .8rem; margin-bottom: 2px; }
+    .floating-card span { color: var(--muted); }
 
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:20px}
-  form{display:flex;gap:10px;flex-wrap:wrap}
-  label.field{flex:1 1 320px;display:block;text-align:left}
-  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  input[type=url],input[type=text]{
-    width:100%;padding:15px 16px;font-size:16px;font-family:var(--mono);
-    background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:11px;outline:none
-  }
-  input::placeholder{color:var(--dimmer);font-family:inherit}
-  input:focus{border-color:var(--accent)}
-  button{
-    padding:15px 26px;font-size:16px;font-weight:650;cursor:pointer;
-    background:var(--accent);color:#04121f;border:0;border-radius:11px;letter-spacing:-.01em;
-    flex:0 0 auto
-  }
-  button:active{transform:translateY(1px)}
-  button[disabled]{opacity:.55;cursor:default}
-  .examples{margin-top:14px;font-size:13px;color:var(--dimmer);text-align:left}
-  .examples button{
-    background:none;border:1px solid var(--line);color:var(--dim);
-    font-family:var(--mono);font-size:12px;font-weight:400;padding:6px 10px;border-radius:8px;margin:4px 6px 0 0
-  }
-  .note{margin-top:12px;font-size:12.5px;color:var(--dimmer);text-align:left}
+    /* Tech strip */
+    .tool-strip { padding: 22px 0 25px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(26,26,26,.018); }
+    .tool-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .tool-label { color: var(--muted); font-size: .73rem; letter-spacing: .13em; font-weight: 800; text-transform: uppercase; white-space: nowrap; }
+    .tool-list { display: flex; justify-content: flex-end; gap: 9px; flex-wrap: wrap; }
+    .tool { padding: 6px 11px; border-radius: 8px; color: #4b4b46; background: rgba(26,26,26,.035); font-size: .78rem; }
 
-  /* verdict */
-  #result{margin-top:22px;display:none}
-  #result.on{display:block}
-  .verdict{border-radius:14px;padding:18px 20px;border:1px solid var(--line);background:var(--panel2)}
-  .verdict .k{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dimmer)}
-  .verdict .v{font-size:clamp(22px,5.4vw,30px);font-weight:750;letter-spacing:-.02em;margin-top:4px}
-  .verdict.safe{border-color:rgba(62,207,142,.4)} .verdict.safe .v{color:var(--safe)}
-  .verdict.warn{border-color:rgba(245,181,68,.4)} .verdict.warn .v{color:var(--warn)}
-  .verdict.bad{border-color:rgba(255,93,93,.45)} .verdict.bad .v{color:var(--bad)}
-  .verdict p{margin:8px 0 0;color:var(--dim);font-size:15px}
+    /* Projects */
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { display: flex; flex-direction: column; min-height: 342px; padding: 23px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; box-shadow: 0 10px 30px rgba(26,26,26,.035); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+    .project-card:hover { transform: translateY(-5px); border-color: rgba(201,91,49,.45); box-shadow: 0 14px 34px rgba(26,26,26,.07); }
+    .project-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .project-icon { display: grid; place-items: center; width: 47px; height: 47px; border: 1px solid rgba(201,91,49,.16); border-radius: 14px; color: var(--accent); background: rgba(201,91,49,.07); }
+    .project-number { color: #8c8a82; font: 600 .78rem ui-monospace, monospace; }
+    .project-card h3 { margin-bottom: 8px; font-size: 1.2rem; letter-spacing: -.035em; line-height: 1.25; }
+    .project-card p { color: var(--muted); font-size: .9rem; margin-bottom: 18px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
+    .tag { padding: 4px 8px; color: #6b6b66; border: 1px solid var(--line); border-radius: 6px; font-size: .69rem; }
+    .project-links { display: flex; align-items: center; gap: 17px; margin-top: auto; padding-top: 10px; }
+    .text-link { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); text-decoration: none; font-size: .83rem; font-weight: 750; }
+    .text-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .text-link.subtle { color: #4b4b46; }
+    .project-icon svg { width: 23px; height: 23px; }
 
-  h2{font-size:15px;margin:26px 0 10px;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+    /* Experience and about */
+    .experience-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: clamp(35px, 7vw, 84px); align-items: start; }
+    .experience-aside { position: sticky; top: 110px; }
+    .experience-card { padding: 29px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); }
+    .experience-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-bottom: 22px; }
+    .role-title { margin-bottom: 4px; font-size: 1.3rem; letter-spacing: -.03em; }
+    .company { color: var(--mint); font-weight: 700; }
+    .date { color: var(--muted); font-size: .82rem; text-align: right; white-space: nowrap; }
+    .experience-card p { color: var(--muted); font-size: .93rem; }
+    .experience-card ul { padding-left: 19px; margin-bottom: 0; color: #4b4b46; font-size: .9rem; }
+    .experience-card li { padding-left: 4px; margin: 9px 0; }
+    .experience-card li::marker { color: var(--accent); }
+    .experience-aside p { color: var(--muted); }
+    .mini-callout { margin-top: 24px; padding: 17px; border-left: 2px solid var(--accent); border-radius: 0 12px 12px 0; background: rgba(201,91,49,.06); color: #4b4b46; font-size: .87rem; }
 
-  /* url anatomy */
-  .anatomy{
-    font-family:var(--mono);font-size:clamp(12.5px,3.4vw,15px);word-break:break-all;
-    background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:14px;line-height:2
-  }
-  .anatomy .p{color:var(--dimmer)}
-  .anatomy .real{
-    background:rgba(90,169,255,.16);color:#bcdcff;border-radius:5px;padding:2px 5px;
-    border-bottom:2px solid var(--accent);font-weight:700
-  }
-  .anatomy .sus{background:rgba(255,93,93,.16);color:#ffc9c9;border-radius:5px;padding:2px 5px}
-  .caption{font-size:13px;color:var(--dim);margin-top:9px}
-  .caption b{color:var(--accent)}
+    .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 22px; }
+    .about-card { padding: 27px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); }
+    .about-card h3 { margin-bottom: 12px; font-size: 1.12rem; letter-spacing: -.025em; }
+    .about-card p { color: var(--muted); font-size: .92rem; }
+    .education-row { padding: 13px 0; border-top: 1px solid var(--line); }
+    .education-row strong { display: block; font-size: .93rem; }
+    .education-row span { display: block; color: var(--muted); font-size: .82rem; }
+    .list-clean { list-style: none; padding: 0; margin: 0; }
+    .list-clean li { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(26,26,26,.07); color: #4b4b46; font-size: .86rem; }
+    .list-clean li:last-child { border: 0; }
+    .list-clean li::before { content: "↗"; color: var(--accent); }
+    .skill-groups { display: grid; gap: 16px; }
+    .skill-group { display: grid; grid-template-columns: 130px 1fr; gap: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(26,26,26,.08); }
+    .skill-group:last-child { border: 0; padding-bottom: 0; }
+    .skill-group strong { color: var(--mint); font-size: .83rem; }
+    .skill-group span { color: #4b4b46; font-size: .88rem; }
 
-  /* checks list */
-  ul.checks{list-style:none;margin:0;padding:0}
-  ul.checks li{
-    display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line);font-size:15px
-  }
-  ul.checks li:first-child{border-top:0}
-  .dot{flex:0 0 auto;width:9px;height:9px;border-radius:50%;margin-top:8px;background:var(--dimmer)}
-  .dot.g{background:var(--safe)} .dot.y{background:var(--warn)} .dot.r{background:var(--bad)}
-  .ct{flex:1}
-  .ct .t{font-weight:600}
-  .ct .d{color:var(--dim);font-size:14px;margin-top:2px}
-  .ct .d code{font-family:var(--mono);font-size:12.5px;color:#bcdcff;background:var(--panel2);padding:1px 5px;border-radius:4px}
+    /* Contact */
+    .contact-panel { position: relative; overflow: hidden; padding: clamp(28px, 5vw, 56px); border: 1px solid rgba(201,91,49,.28); border-radius: 28px; background: radial-gradient(ellipse at 100% 0%, rgba(201,91,49,.07), transparent 34rem), linear-gradient(120deg, #f1f0ec, #ffffff); }
+    .contact-panel::after { content: "RM"; position: absolute; right: 24px; bottom: -105px; color: rgba(201,91,49,.04); font-size: 18rem; line-height: 1; font-weight: 900; letter-spacing: -.1em; pointer-events: none; }
+    .contact-content { position: relative; z-index: 1; max-width: 700px; }
+    .contact-content h2 { margin: 12px 0 14px; }
+    .contact-content p { max-width: 590px; color: var(--muted); margin-bottom: 24px; }
+    .contact-details { display: flex; flex-wrap: wrap; gap: 12px 23px; margin-top: 24px; }
+    .contact-details a { color: #1a1a1a; text-decoration: none; font-size: .87rem; }
+    .contact-details a:hover { color: var(--accent); }
+    #about { background: var(--bg-soft); }
+    #about .about-card { background: rgba(250,250,248,.78); }
+    .site-footer { padding: 28px 0 35px; color: #6b6b66; font-size: .78rem; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .footer-inner a { color: #6b6b66; text-decoration: none; }
+    .footer-inner a:hover { color: var(--accent); }
 
-  .agebar{height:9px;border-radius:6px;background:var(--panel);overflow:hidden;margin-top:10px;border:1px solid var(--line)}
-  .agebar i{display:block;height:100%;background:var(--safe)}
-  .statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:12px}
-  .stat{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:12px 13px}
-  .stat .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer)}
-  .stat .v{font-size:16px;font-weight:650;margin-top:3px;word-break:break-word}
-
-  .loading{color:var(--dim);font-size:14px;font-family:var(--mono);padding:14px 0}
-
-  /* real text content for Google + AI assistants */
-  .content{margin:38px 0 0;border-top:1px solid var(--line);padding-top:8px}
-  .content h2{font-family:inherit;text-transform:none;letter-spacing:-.01em;font-size:22px;color:var(--text);margin-top:34px}
-  .content h3{font-size:17px;margin:24px 0 6px}
-  .content p{color:var(--dim);font-size:15.5px;margin:10px 0}
-  .content ul,.content ol{color:var(--dim);font-size:15.5px;padding-left:22px}
-  .content li{margin:7px 0}
-  .content b,.content strong{color:var(--text)}
-  .content code{font-family:var(--mono);font-size:13.5px;color:#bcdcff;background:var(--panel2);padding:1px 5px;border-radius:4px}
-  .content table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
-  .content th,.content td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);color:var(--dim);vertical-align:top}
-  .content th{color:var(--text);font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
-  .disclaimer{
-    margin:30px 0 0;padding:16px 18px;border:1px solid rgba(245,181,68,.35);
-    background:rgba(245,181,68,.06);border-radius:12px;font-size:14.5px;color:var(--dim)
-  }
-  .disclaimer b{color:var(--warn)}
-  footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 44px;color:var(--dimmer);font-size:13px;text-align:center}
-  footer a{color:var(--dim)}
-  @media (max-width:520px){ button{flex:1 1 100%} .card{padding:16px} }
-</style>
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 20px; }
+      .hero-copy { max-width: 760px; }
+      .hero-art { min-height: 390px; }
+      .project-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-card:last-child { grid-column: 1 / -1; min-height: 290px; }
+      .experience-grid { grid-template-columns: 1fr; }
+      .experience-aside { position: static; }
+    }
+    @media (max-width: 690px) {
+      .wrap { width: min(var(--max), calc(100% - 30px)); }
+      .header-inner { min-height: 68px; }
+      .nav { display: none; }
+      .mobile-nav { display: block; }
+      .hero { padding: 66px 0 58px; }
+      h1 { font-size: clamp(3rem, 15vw, 4.9rem); }
+      .hero-art { min-height: 330px; }
+      .orbit { width: 290px; height: 290px; }
+      .floating-card { right: 0; bottom: 12px; }
+      .section { padding: 70px 0; }
+      .project-grid { grid-template-columns: 1fr; }
+      .project-card, .project-card:last-child { grid-column: auto; min-height: unset; }
+      .tool-inner { display: block; }
+      .tool-list { justify-content: flex-start; margin-top: 13px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .skill-group { grid-template-columns: 1fr; gap: 5px; }
+      .experience-card { padding: 22px; }
+      .experience-top { display: block; }
+      .date { text-align: left; margin-top: 8px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
 </head>
 <body>
-
-<header class="wrap">
-  <div class="brand">LinkWary</div>
-  <h1>Is this link safe?</h1>
-  <p class="lede">Paste any link. See the real website hiding inside it, how old that website is, and every phishing warning sign — before you click.</p>
-  <p class="one-sentence">This is a <b>free one-page link safety checker</b> for <b>anyone who received a suspicious link by email, SMS or WhatsApp</b> that <b>breaks the address into its parts, shows the real domain, looks up how long ago that domain was registered and when it expires, and lists the phishing red flags it finds.</b></p>
-</header>
-
-<!-- AD SLOT 1 — Adsterra ad unit 1. Live. -->
-<div class="wrap"><div class="ad-slot" data-adslot="1">
-  <!-- Adsterra ad unit 1 -->
-  <script data-cfasync="false" src="https://abscloud.org/1/c1ef1b585dd73161a6494bd83d1f75c0"></script>
-</div></div>
-
-<main class="wrap">
-  <div class="card">
-    <form id="f" autocomplete="off" novalidate>
-      <label class="field">
-        <span class="sr">Paste the link you want to check</span>
-        <input id="u" type="text" inputmode="url" placeholder="Paste a link, e.g. https://login.paypa1-secure.com/verify" aria-label="Link to check">
-      </label>
-      <button id="go" type="submit">Check link</button>
-    </form>
-    <div class="examples">
-      Try one:
-      <button type="button" data-ex="https://www.google.com/search?q=is+this+link+safe">google.com (safe)</button>
-      <button type="button" data-ex="http://netflix-billing-update.secure-verify.co/login">a fake Netflix link</button>
-      <button type="button" data-ex="https://185.220.101.44/invoice">an IP address link</button>
-      <div class="note">Nothing you paste is uploaded. The breakdown and the checks run inside your own browser. Only the domain name is looked up in the public registry to get its registration date.</div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Richard Mudau, home">
+        <span class="brand-mark">RM</span>
+        <span class="brand-copy">Richard Mudau<small>Software developer</small></span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#work">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#about">About</a>
+        <a class="header-cta" href="#contact">Let’s talk <span class="arrow">↗</span></a>
+      </nav>
+      <details class="mobile-nav">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="#work">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </details>
     </div>
-  </div>
+  </header>
 
-  <section id="result" aria-live="polite">
-    <div id="verdictBox" class="verdict">
-      <div class="k">Verdict</div>
-      <div class="v" id="verdictText">—</div>
-      <p id="verdictWhy"></p>
-    </div>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="hero-status"><span class="pill"><span class="dot"></span> Open to junior roles &amp; internships</span></div>
+          <div class="eyebrow">Aspiring professional software developer</div>
+          <h1>Curious by nature.<br /><span class="accent">Builder</span> by choice.</h1>
+          <p class="hero-role">I’m Richard Lutendo Mudau — a software developer in the making, based in Pretoria, South Africa.</p>
+          <p class="hero-text">I enjoy turning ideas into useful software and understanding the systems behind it. I’m building with JavaScript, React, Python and SQL, backed by hands-on experience in cloud infrastructure, Linux, Docker and security.</p>
+          <div class="button-row">
+            <a class="button button-primary" href="#work">Explore my work <span class="arrow">↓</span></a>
+            <a class="button button-secondary" href="assets/Richard-Lutendo-Mudau-CV.pdf" target="_blank" rel="noopener">Download my CV <span class="arrow">↗</span></a>
+          </div>
+          <div class="hero-meta">
+            <span class="meta-item"><span class="meta-icon">⌖</span> Pretoria, South Africa</span>
+            <span class="meta-item"><span class="meta-icon">⌘</span> Software · Cloud · Security</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Decorative code window showing a software developer profile">
+          <div class="art-grid"></div>
+          <div class="orbit"></div>
+          <div class="code-card">
+            <div class="code-top"><span>richard / about.js</span><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+            <div class="code-body" aria-label="Code sample">
+              <div class="code-line"><span class="code-key">const</span> developer = {</div>
+              <div class="code-line code-indent">name: <span class="code-string">"Richard"</span>,</div>
+              <div class="code-line code-indent">focus: [</div>
+              <div class="code-line code-indent">&nbsp;&nbsp;<span class="code-string">"software"</span>,</div>
+              <div class="code-line code-indent">&nbsp;&nbsp;<span class="code-string">"cloud"</span>,</div>
+              <div class="code-line code-indent">&nbsp;&nbsp;<span class="code-string">"learning"</span></div>
+              <div class="code-line code-indent">],</div>
+              <div class="code-line code-indent">build: <span class="code-func">(idea) =&gt; ship</span>(idea),</div>
+              <div class="code-line">};</div>
+            </div>
+            <div class="code-foot"><span class="code-comment">// always improving</span><span class="online">Available for opportunities</span></div>
+          </div>
+          <div class="floating-card"><strong>Build · Learn · Improve</strong><span>One project at a time.</span></div>
+        </div>
+      </div>
+    </section>
 
-    <h2>1 · The address, taken apart</h2>
-    <div class="anatomy" id="anatomy"></div>
-    <p class="caption" id="anatomyCaption"></p>
-
-    <h2>2 · Warning signs found</h2>
-    <ul class="checks" id="checks"></ul>
-
-    <h2>3 · How old is the real domain?</h2>
-    <div id="ageBox"><div class="loading">Looking up public registry records…</div></div>
-  </section>
-
-  <!-- Real readable text. Google and AI assistants can only read this, not anything drawn by code. -->
-  <div class="content">
-    <h2>What this link checker actually does</h2>
-    <p>Most people judge a link by how it starts. That is the mistake. A link like <code>https://paypal.com.secure-login.xyz/verify</code> begins with the word PayPal and ends with a page called verify, so it reads as legitimate at a glance. The only part of that address that decides which website you actually reach is <b>secure-login.xyz</b>. Everything to the left of it is decoration that the owner of secure-login.xyz controls completely.</p>
-    <p>This tool takes the address apart, marks the one part that matters, and then runs a fixed list of checks that phishing investigators use by hand. It answers one question: does this link contain any of the structural warning signs that appear in scam links?</p>
-
-    <h3>The checks it runs, in order</h3>
-    <ol>
-      <li><b>Real domain extraction.</b> The address is split into scheme, subdomain, registered domain, port, path and query. The registered domain — the part you would actually type to reach the site — is highlighted.</li>
-      <li><b>Hidden username check.</b> An <code>@</code> symbol before the first slash means everything to its left is a login name, not a website. <code>https://absa.co.za@evil.com</code> goes to evil.com.</li>
-      <li><b>Lookalike character check.</b> Some letters and numbers are nearly identical: capital I, lowercase l and the number 1; capital O and zero. Scammers swap them so <code>paypa1.com</code> reads as paypal.com.</li>
-      <li><b>Brand typosquatting check.</b> The domain is compared against 40 well-known brand names. A match at one or two characters of difference, or a brand name sitting inside a longer domain, is flagged.</li>
-      <li><b>Subdomain abuse check.</b> A brand name appearing in the subdomain rather than the domain means the address is trying to borrow trust it does not own.</li>
-      <li><b>IP address check.</b> Real companies almost never send links to a raw numeric IP address such as <code>185.220.101.44</code>. It hides the owner completely.</li>
-      <li><b>Unusual port check.</b> Anything other than the standard 80 and 443 ports is rare on consumer websites and common on temporary scam infrastructure.</li>
-      <li><b>Unencrypted connection check.</b> <code>http://</code> rather than <code>https://</code> on a login or payment page means the traffic can be read in transit.</li>
-      <li><b>URL shortener check.</b> Shortened links hide the destination on purpose. The tool tells you to expand it and check the result.</li>
-      <li><b>Domain age lookup.</b> The registered domain is sent to the public RDAP registry directory and the response gives the registration date, the expiry date, the registrar and whether DNSSEC is enabled.</li>
-    </ol>
-
-    <h2>Why domain age is the strongest free signal</h2>
-    <p>When somebody registers a web address, the registry records the date. That record is public and free to read through a standard protocol called RDAP, which is run by the registries themselves and by the free directory at rdap.org. Nobody can quietly backdate it.</p>
-    <p>Phishing works on volume and on speed. An attacker buys a few hundred cheap domains, sends the messages, collects credentials for two or three weeks, and abandons the domains once they are blocklisted. That is why a registration date inside the last 30 days is such a strong warning sign, and why it pairs badly with a second sign: a domain registered recently that also expires within twelve months was bought for one short campaign rather than for a business.</p>
-    <table>
-      <tr><th>Domain age</th><th>What it usually means</th></tr>
-      <tr><td>Older than 5 years</td><td>Normal for an established company. Not proof of honesty, but not a warning sign.</td></tr>
-      <tr><td>1 to 5 years</td><td>Common for small businesses and newer services. Judge it together with the other checks.</td></tr>
-      <tr><td>30 days to 1 year</td><td>New. Legitimate startups sit here too, so look for a brand name being copied before assuming the worst.</td></tr>
-      <tr><td>Under 30 days</td><td>High risk. Most blocklisted phishing domains are this new.</td></tr>
-      <tr><td>Already expired</td><td>The address is up for grabs. Anyone can buy it, including somebody who will rebuild the old site as a trap.</td></tr>
-    </table>
-    <p>Some country registries, including several African and Asian extensions, do not publish RDAP records at all. When that happens the tool says the record is unavailable instead of guessing, because a missing record is not the same thing as a safe one.</p>
-
-    <h2>How to read a URL, in one paragraph</h2>
-    <p>Read a web address from the first single slash backwards, not forwards. In <code>https://login.absa.co.za.verify-secure.info/alert</code> the first single slash comes after <code>verify-secure.info</code>, so that is the website you will reach. <code>login.absa.co.za</code> is a subdomain label that the owner of verify-secure.info invented, and <code>/alert</code> is a page on their server. The rule is short: <b>the real domain is the last group of words before the first slash.</b> Everything before it is a costume.</p>
-
-    <h2>What this tool cannot tell you</h2>
-    <div class="disclaimer">
-      <b>Read this.</b> A clean result here means the link contains none of the structural warning signs this tool checks for. It is not a guarantee that the destination is honest. This tool does not fetch the target website, does not scan it for malware, does not detect fake login forms, and does not query real-time blocklists of known malicious addresses. Legitimate old domains get hacked and used to host scam pages every day. Keep your browser warnings on, keep antivirus software updated, and when a message claims to be from your bank, type the bank's address yourself instead of clicking anything.
+    <div class="tool-strip" aria-label="Technologies">
+      <div class="wrap tool-inner">
+        <span class="tool-label">Tools I’m working with</span>
+        <div class="tool-list">
+          <span class="tool">JavaScript</span><span class="tool">React</span><span class="tool">Python</span>
+          <span class="tool">SQL</span><span class="tool">Git &amp; GitHub</span><span class="tool">AWS</span><span class="tool">Terraform</span>
+        </div>
+      </div>
     </div>
 
-    <h2>Questions people ask about suspicious links</h2>
-    <h3>How do I know if a link is safe before clicking it?</h3>
-    <p>Find the real domain by reading backwards from the first single slash. Then check the domain's age in the public registry. Then look for a copied brand name, a swapped character, a raw IP address, or an unencrypted connection on a page that asks for a password. If two or more of those appear together, treat the link as hostile.</p>
-
-    <h3>Does this checker upload the links I paste?</h3>
-    <p>No. The address is broken apart and checked inside your own browser using JavaScript on this page. The lookup of the registered domain name against the public RDAP directory is the only request this page makes on your behalf. The path, the query string and any tokens in your link are never transmitted &mdash; not to us, not to anyone. The advertising network used on this page loads its own files and sets its own cookies, but the link you paste is never part of that; see the <a href="privacy.html">privacy policy</a> for the detail.</p>
-
-    <h3>Are URL shorteners dangerous?</h3>
-    <p>Not by themselves, but they hide the destination, which is what an attacker wants. Expand a shortened link before trusting it. Several shortening services reveal the target when you append a plus sign to the address.</p>
-
-    <h3>What is punycode and why does the tool mention it?</h3>
-    <p>Domain names may only use basic letters, numbers and hyphens. To allow other alphabets, the system converts them into a coded form that starts with the letters <code>xn--</code>. That coding also makes it possible to build an address that looks like a familiar brand while being a completely different domain, so any address containing <code>xn--</code> deserves a second look.</p>
-
-    <h3>Should I check links from WhatsApp and SMS?</h3>
-    <p>Those are the two channels where link scams are most common, because both let a stranger reach you with a message that looks like it came from somebody you know. Delivery notifications, bank alerts, parcel tracking messages, job offers and prize notifications arriving through WhatsApp or SMS are the categories to check every time.</p>
-  </div>
-</main>
-
-<!-- AD SLOT 2 — Adsterra ad unit 2. Live. -->
-<div class="wrap"><div class="ad-slot" data-adslot="2">
-  <!-- Adsterra ad unit 2 -->
-  <script async="async" data-cfasync="false" src="https://bauval.org/21/294c9912d0cbde1fc0a330a417066e78"></script>
-  <div id="container-294c9912d0cbde1fc0a330a417066e78"></div>
-</div></div>
-
-<footer class="wrap">
-  LinkWary · free link safety checker · no account, no download, no uploaded links<br>
-  Domain records from the public RDAP directory (rdap.org). Not affiliated with any brand named on this page.<br>
-  <a href="privacy.html">Privacy</a> · <a href="about.html">About</a>
-</footer>
-
-<script>
-(function(){
-  "use strict";
-
-  /* ---------- brand list used for the typosquatting check ---------- */
-  var BRANDS = [
-    "google","youtube","facebook","instagram","whatsapp","amazon","apple","microsoft","netflix",
-    "paypal","visa","mastercard","spotify","tiktok","twitter","linkedin","netflix","steam",
-    "playstation","xbox","nintendo","discord","telegram","snapchat","pinterest","reddit",
-    "absa","standardbank","nedbank","fnb","capitec","investec","tyme bank","africanbank",
-    "takealot","superbalist","woolworths","checkers","picknpay","shoprite","makro","vodacom",
-    "mtn","cellc","telkom","rain","eskom","sars","homeaffairs","dhl","fedex","postnet",
-    "ubereats","uber","bolt","airbnb","booking","gumtree","olx","binance","coinbase","luno",
-    "valr","paypal","shopify","ebay","aliexpress","temu","shein","github","cloudflare"
-  ];
-
-  /* multi-part public suffixes we care about, longest first */
-  var SUFFIXES = [
-    "co.za","org.za","web.za","net.za","ac.za","gov.za","school.za","law.za","mil.za","nom.za",
-    "co.uk","org.uk","ac.uk","gov.uk","me.uk","net.uk",
-    "com.au","net.au","org.au","edu.au","gov.au","id.au",
-    "co.nz","net.nz","org.nz","govt.nz","ac.nz",
-    "co.in","net.in","org.in","gov.in","ac.in","firm.in","gen.in","ind.in",
-    "com.br","net.br","org.br","gov.br",
-    "co.ke","or.ke","ne.ke","go.ke","ac.ke",
-    "com.ng","org.ng","gov.ng","net.ng",
-    "co.zw","org.zw","ac.zw","gov.zw",
-    "com.mx","org.mx","gob.mx","net.mx",
-    "com.tr","org.tr","net.tr","gov.tr",
-    "com.cn","net.cn","org.cn","gov.cn",
-    "co.jp","ne.jp","or.jp","ac.jp","go.jp",
-    "com.sg","net.sg","org.sg","gov.sg","edu.sg",
-    "com.hk","org.hk","net.hk","gov.hk","edu.hk",
-    "com.ar","net.ar","org.ar","gob.ar",
-    "com.my","net.my","org.my","gov.my","edu.my",
-    "com.ph","net.ph","org.ph","gov.ph",
-    "com.ua","org.ua","net.ua","gov.ua",
-    "co.il","org.il","net.il","gov.il","ac.il",
-    "com.sa","net.sa","org.sa","gov.sa",
-    "co.ae","net.ae","org.ae","gov.ae","ac.ae",
-    "com.eg","org.eg","net.eg","gov.eg",
-    "com.pk","net.pk","org.pk","gov.pk",
-    "com.bd","net.bd","org.bd","gov.bd",
-    "com.vn","net.vn","org.vn","gov.vn",
-    "com.tw","net.tw","org.tw","gov.tw",
-    "com.pl","net.pl","org.pl","gov.pl",
-    "com.ru","net.ru","org.ru","gov.ru",
-    "co.kr","or.kr","ne.kr","go.kr","ac.kr",
-    "com.es","org.es","nom.es","gob.es","edu.es",
-    "com.pt","org.pt","net.pt","gov.pt",
-    "com.gr","net.gr","org.gr","gov.gr",
-    "com.it","org.it","net.it","gov.it",
-    "com.de","org.de","net.de",
-    "com.fr","asso.fr","nom.fr","gouv.fr",
-    "com.nl","org.nl","net.nl","gov.nl",
-    "com.se","org.se","net.se",
-    "com.no","org.no","net.no",
-    "com.fi","org.fi","net.fi",
-    "com.dk","org.dk","net.dk",
-    "com.ch","org.ch","net.ch","gov.ch",
-    "com.be","org.be","net.be",
-    "com.at","or.at","co.at","gv.at","ac.at",
-    "com.ie","org.ie","net.ie","gov.ie",
-    "com.eu","org.eu"
-  ];
-
-  /* lookalike substitutions used both ways */
-  var CONFUSABLES = {
-    "1":"l","!":"i","|":"l","0":"o","5":"s","$":"s","3":"e","7":"t","2":"z","4":"a",
-    "@":"a","vv":"w","rn":"m","cl":"d","ı":"i","ì":"i","í":"i","î":"i","ï":"i",
-    "ó":"o","ò":"o","ô":"o","ö":"o","á":"a","à":"a","â":"a","ä":"a","é":"e","è":"e",
-    "ê":"e","ë":"e","ú":"u","ù":"u","û":"u","ü":"u","ç":"c","ñ":"n","ý":"y"
-  };
-
-  var SHORTENERS = ["bit.ly","tinyurl.com","goo.gl","t.co","ow.ly","is.gd","buff.ly","rebrand.ly",
-    "cutt.ly","shorturl.at","rb.gy","bit.do","soo.gd","lnkd.in","wa.me","tiny.cc","s.id","qr.ae"];
-
-  /* ---------- helpers ---------- */
-  function el(id){ return document.getElementById(id); }
-
-  function normalise(str){
-    var out = "", i, ch;
-    str = String(str).toLowerCase();
-    for(i=0;i<str.length;i++){
-      ch = str.charAt(i);
-      if(CONFUSABLES[ch] !== undefined && /[a-z0-9]/.test(ch) === false){ out += CONFUSABLES[ch]; }
-      else if(ch === "-"){ out += ""; }
-      else { out += ch; }
-    }
-    return out.replace(/[^a-z0-9]/g,"");
-  }
-
-  function levenshtein(a,b){
-    if(a === b) return 0;
-    var m=a.length, n=b.length, i, j, prev, cur, cost;
-    if(!m) return n; if(!n) return m;
-    prev = new Array(n+1);
-    for(j=0;j<=n;j++) prev[j]=j;
-    for(i=1;i<=m;i++){
-      cur=[i];
-      for(j=1;j<=n;j++){
-        cost = a.charAt(i-1)===b.charAt(j-1) ? 0 : 1;
-        cur[j]=Math.min(prev[j]+1, cur[j-1]+1, prev[j-1]+cost);
-      }
-      prev=cur;
-    }
-    return prev[n];
-  }
-
-  /* returns {domain, suffix} or null */
-  function registeredDomain(host){
-    var parts = host.toLowerCase().split(".").filter(Boolean);
-    if(parts.length < 2) return {domain: host.toLowerCase(), suffix:""};
-    var i, cand;
-    for(i=0;i<SUFFIXES.length;i++){
-      cand = SUFFIXES[i].split(".");
-      if(parts.length >= cand.length+1){
-        var tail = parts.slice(parts.length-cand.length).join(".");
-        if(tail === SUFFIXES[i]){
-          return {domain: parts.slice(parts.length-cand.length-1).join("."), suffix:SUFFIXES[i]};
-        }
-      }
-    }
-    return {domain: parts.slice(-2).join("."), suffix: parts.slice(-1)[0]};
-  }
-
-  function subdomainOf(host, regDomain){
-    var h = host.toLowerCase();
-    if(h === regDomain) return "";
-    if(h.slice(-regDomain.length-1) === "."+regDomain) return h.slice(0, h.length-regDomain.length-1);
-    return "";
-  }
-
-  function isIP(host){
-    if(/^\d{1,3}(\.\d{1,3}){3}$/.test(host)) return true;
-    if(host.indexOf(":") !== -1 && /^[0-9a-f:\.\[\]]+$/i.test(host)) return true;
-    return false;
-  }
-
-  function daysBetween(a,b){ return Math.floor((b-a)/86400000); }
-
-  function fmtDate(iso){
-    var d = new Date(iso);
-    if(isNaN(d.getTime())) return iso;
-    return d.toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"});
-  }
-
-  function humanAge(days){
-    if(days < 0) return "expired";
-    if(days < 31) return days + (days===1?" day":" days") + " old";
-    if(days < 365) return Math.floor(days/30.44) + " months old";
-    var y = days/365.25;
-    return (y < 10 ? y.toFixed(1) : Math.round(y)) + " years old";
-  }
-
-  /* ---------- the actual check ---------- */
-  function analyse(raw){
-    var findings = [];   /* {level:'g'|'y'|'r', title, detail} */
-    var out = {ok:false, findings:findings};
-
-    if(!raw || !raw.trim()){ findings.push({level:"y",title:"Nothing to check",detail:"Paste a link into the box above."}); return out; }
-
-    var text = raw.trim();
-    if(!/^[a-zA-Z][a-zA-Z0-9+.\-]*:\/\//.test(text)) text = "https://" + text;
-
-    var u;
-    try { u = new URL(text); }
-    catch(e){
-      findings.push({level:"r",title:"This is not a readable web address",detail:"The browser could not parse it at all. That alone is a reason not to click it. Raw text: <code>"+escapeHtml(raw.slice(0,120))+"</code>"});
-      out.ok=true; return out;
-    }
-
-    var scheme = u.protocol.replace(":","");
-    var host = (u.hostname||"").replace(/^\[|\]$/g,"").toLowerCase();
-    var port = u.port || "";
-    var path = u.pathname || "/";
-    var search = u.search || "";
-    var userinfo = "";
-
-    /* hidden username: URL() strips it into u.username */
-    if(u.username || u.password){
-      userinfo = u.username + (u.password ? ":***" : "");
-      findings.push({level:"r",title:"Hidden username in the address",
-        detail:"Everything before an <code>@code</code> symbol is a login name, not a website. This link logs in as <code>"+escapeHtml(userinfo)+"</code> and then goes to the real domain shown below."});
-    }
-
-    if(!host){
-      findings.push({level:"r",title:"No domain found in this address",detail:"There is nothing to check."});
-      out.ok=true; return out;
-    }
-
-    /* IP literal */
-    if(isIP(host)){
-      findings.push({level:"r",title:"This link goes to a raw numeric address",
-        detail:"It points at <code>"+escapeHtml(host)+"</code> instead of a name. Legitimate banks, shops and services almost never do this, because a number reveals nothing about who owns it and cannot be blocklisted by name."});
-      out.regDomain = host; out.host = host; out.isIP = true;
-      out.parsed = {scheme:scheme, sub:"", reg:host, port:port, path:path, search:search, userinfo:userinfo, host:host};
-      out.ok=true; return out;
-    }
-
-    var rd = registeredDomain(host);
-    var regDomain = rd.domain;
-    var sub = subdomainOf(host, regDomain);
-    var sld = regDomain.split(".")[0];
-    var nsld = normalise(sld);
-
-    out.regDomain = regDomain; out.host = host; out.isIP = false;
-    out.parsed = {scheme:scheme, sub:sub, reg:regDomain, port:port, path:path, search:search, userinfo:userinfo, host:host};
-
-    /* unencrypted */
-    if(scheme !== "https"){
-      findings.push({level: (path.length>1||search) ? "y":"y",
-        title:"This link is not encrypted",
-        detail:"It uses <code>"+escapeHtml(scheme)+"://</code> instead of <code>https://</code>. Anything typed on that page, including a password, can be read by other people on the same network."});
-    }
-
-    /* unusual port */
-    if(port && port !== "80" && port !== "443"){
-      findings.push({level:"y",title:"Unusual port number",
-        detail:"The address specifies port <code>"+escapeHtml(port)+"</code>. Ordinary consumer websites use 443 for encrypted and 80 for unencrypted traffic. A non-standard port usually means temporary or hand-built infrastructure."});
-    }
-
-    /* punycode */
-    if(/(^|\.)xn--/.test(host)){
-      findings.push({level:"r",title:"Coded international domain (punycode)",
-        detail:"The address contains <code>xn--</code>, which is how browsers encode non-Latin characters in a domain. This encoding is the standard trick for building an address that looks like a known brand but is a different website entirely."});
-    }
-
-    /* lookalike characters in the domain */
-    var lookalikeHits = [];
-    var pairs = [["1","l"],["0","o"],["5","s"],["rn","m"],["vv","w"],["cl","d"]];
-    var i;
-    for(i=0;i<pairs.length;i++){
-      if(sld.indexOf(pairs[i][0]) !== -1 && nsld.indexOf(pairs[i][1]) !== -1) lookalikeHits.push(pairs[i][0]+" looks like "+pairs[i][1]);
-    }
-    var brandHit = matchBrand(nsld, sld, regDomain);
-    if(lookalikeHits.length && brandHit){
-      findings.push({level:"r",title:"Character substitution that copies a brand name",
-        detail:"<code>"+escapeHtml(sld)+"</code> becomes <code>"+escapeHtml(nsld)+"</code> when lookalike characters are swapped back — that is <b>"+escapeHtml(brandHit.brand)+"</b>. "+escapeHtml(lookalikeHits.join("; "))+"."});
-    } else if(lookalikeHits.length){
-      findings.push({level:"y",title:"Lookalike characters in the domain",
-        detail:"<code>"+escapeHtml(sld)+"</code> contains characters that imitate others ("+escapeHtml(lookalikeHits.join("; "))+"). Check that it spells what you expect."});
-    }
-
-    /* brand typosquatting */
-    if(brandHit && brandHit.how === "distance"){
-      findings.push({level:"r",title:"Almost exactly a well-known brand name",
-        detail:"<code>"+escapeHtml(sld)+"</code> is "+brandHit.dist+" character"+(brandHit.dist===1?"":"s")+" away from <b>"+escapeHtml(brandHit.brand)+"</b>. The genuine site is <code>"+escapeHtml(brandHit.brand)+"."+escapeHtml(guessTLD(brandHit.brand))+"</code>, which is not this address."});
-    }
-
-    /* brand in subdomain = borrowed trust */
-    if(sub){
-      var nsub = normalise(sub);
-      var subBrand = null, k;
-      for(k=0;k<BRANDS.length;k++){
-        if(BRANDS[k].length >= 4 && nsub.indexOf(normalise(BRANDS[k])) !== -1){ subBrand = BRANDS[k]; break; }
-      }
-      if(subBrand && normalise(regDomain).indexOf(normalise(subBrand)) === -1){
-        findings.push({level:"r",title:"A brand name is being borrowed by the subdomain",
-          detail:"The words <code>"+escapeHtml(sub)+"</code> sit to the left of the real domain. Whoever owns <code>"+escapeHtml(regDomain)+"</code> invented that label — it has no connection to <b>"+escapeHtml(subBrand)+"</b>. You are going to "+escapeHtml(regDomain)+", not to "+escapeHtml(subBrand)+"."});
-      } else if(sub.split(".").length >= 3){
-        findings.push({level:"y",title:"Deeply stacked subdomains",
-          detail:"There are "+sub.split(".").length+" levels of subdomain here (<code>"+escapeHtml(sub)+"</code>). Real services rarely need that many, and long stacks are used to make an address too tedious to read carefully."});
-      }
-    }
-
-    /* brand word inside a longer domain */
-    if(brandHit && brandHit.how === "contains" && nsld.length > brandHit.brand.length + 2){
-      findings.push({level:"y",title:"A brand name buried inside a longer domain",
-        detail:"<code>"+escapeHtml(sld)+"</code> contains the word <b>"+escapeHtml(brandHit.brand)+"</b> plus extra characters. Adding words around a brand name is a common way to look official while registering something that was still available."});
-    }
-
-    /* hyphens */
-    var hyphens = (sld.match(/-/g)||[]).length;
-    if(hyphens >= 2){
-      findings.push({level:"y",title:"Multiple hyphens in the domain",
-        detail:"<code>"+escapeHtml(sld)+"</code> uses "+hyphens+" hyphens. Established companies almost never register hyphenated names; scammers do, because the unhyphenated version is already taken."});
-    }
-
-    /* shortener */
-    var si;
-    for(si=0;si<SHORTENERS.length;si++){
-      if(host === SHORTENERS[si] || host.slice(-SHORTENERS[si].length-1) === "."+SHORTENERS[si]){
-        findings.push({level:"y",title:"This is a shortened link",
-          detail:"The destination is hidden on purpose by <code>"+escapeHtml(host)+"</code>. Expand it first, then paste the expanded address back in here. Nothing about the real target can be judged until you see it."});
-        break;
-      }
-    }
-
-    /* suspicious words */
-    var SUS = ["verify","verification","secure","security","login","signin","account","billing","update","confirm","suspend","wallet","recovery","authenticate","kyc","invoice","payment","parcel","delivery","customs"];
-    var susHit = [];
-    for(i=0;i<SUS.length;i++){ if(nsld.indexOf(SUS[i])!==-1) susHit.push(SUS[i]); if(normalise(sub).indexOf(SUS[i])!==-1 && susHit.indexOf(SUS[i])===-1) susHit.push(SUS[i]); }
-    if(susHit.length && !brandHit){
-      findings.push({level:"y",title:"Urgency wording in the address",
-        detail:"The address contains "+susHit.map(function(s){return "<code>"+escapeHtml(s)+"</code>";}).join(", ")+". Real services put these words on the page, not in the domain name."});
-    }
-
-    /* free / throwaway TLD */
-    var tld = regDomain.split(".").slice(1).join(".");
-    var CHEAP = ["xyz","top","club","icu","online","site","website","shop","store","live","life","world","space","fun","click","link","buzz","rest","cyou","monster","pw","tk","ml","ga","cf","gq"];
-    if(CHEAP.indexOf(tld) !== -1){
-      findings.push({level:"y",title:"A cheap bulk-registration extension",
-        detail:"The address ends in <code>."+escapeHtml(tld)+"</code>. These extensions cost almost nothing to register in bulk and are heavily used for short-lived scam pages. It is not proof of anything on its own."});
-    }
-
-    /* long path with tokens */
-    if(search.length > 60 || /[?&](token|key|id|code|auth|session)=/i.test(search)){
-      findings.push({level:"g",title:"The link carries a personal token",
-        detail:"There is identifying data attached after the <code>?</code>. That is normal for order-tracking and one-time login links, but it means you should not share this exact link publicly — anybody who has it may have access to your session."});
-    }
-
-    if(!findings.length){
-      findings.push({level:"g",title:"No structural warning signs found",
-        detail:"The address is encrypted, points at a normal domain name, does not copy a brand name and contains no hidden username, odd port or lookalike characters. Domain age is checked separately below."});
-    }
-
-    out.ok = true;
-    return out;
-  }
-
-  function guessTLD(brand){
-    var map = {"absa":"co.za","fnb":"co.za","nedbank":"co.za","standardbank":"co.za","capitec":"co.za",
-      "takealot":"co.za","vodacom":"co.za","mtn":"co.za","cellc":"co.za","telkom":"co.za","eskom":"co.za",
-      "sars":"gov.za","woolworths":"co.za","checkers":"co.za","shoprite":"co.za","makro":"co.za",
-      "superbalist":"co.za","luno":"com","valr":"com","postnet":"co.za","dhl":"com","fedex":"com"};
-    if(map[brand]) return map[brand];
-    return "com";
-  }
-
-  function matchBrand(nsld, sld, regDomain){
-    var i, b, nb, d;
-    for(i=0;i<BRANDS.length;i++){
-      b = BRANDS[i]; nb = normalise(b);
-      if(!nb || nb.length < 4) continue;
-      if(nb === nsld) continue;              /* it IS the brand — fine */
-      if(nsld === nb) continue;
-      d = levenshtein(nsld, nb);
-      if(d > 0 && d <= 2 && Math.abs(nsld.length-nb.length) <= 2 && nb.length >= 5){
-        return {brand:b, how:"distance", dist:d};
-      }
-    }
-    for(i=0;i<BRANDS.length;i++){
-      b = BRANDS[i]; nb = normalise(b);
-      if(nb.length < 5) continue;
-      if(nsld.indexOf(nb) !== -1 && nsld !== nb){ return {brand:b, how:"contains"}; }
-    }
-    return null;
-  }
-
-  function escapeHtml(s){
-    return String(s).replace(/[&<>"']/g,function(c){
-      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
-    });
-  }
-
-  /* ---------- rendering ---------- */
-  function renderAnatomy(p, host){
-    var box = el("anatomy"), cap = el("anatomyCaption");
-    var h = "";
-    h += '<span class="p">'+escapeHtml(p.scheme)+':\/\/</span>';
-    if(p.userinfo) h += '<span class="sus">'+escapeHtml(p.userinfo)+'@</span>';
-    if(p.sub) h += '<span class="p">'+escapeHtml(p.sub)+'.</span>';
-    h += '<span class="real">'+escapeHtml(p.reg)+'</span>';
-    if(p.port) h += '<span class="sus">:'+escapeHtml(p.port)+'</span>';
-    h += '<span class="p">'+escapeHtml(p.path==="/"?"/":p.path)+escapeHtml(p.search)+'</span>';
-    box.innerHTML = h;
-
-    if(p.sub){
-      cap.innerHTML = 'The highlighted part is the only part that decides where you go: <b>'+escapeHtml(p.reg)+'</b>. Everything to the left of it, including <code>'+escapeHtml(p.sub)+'</code>, is a label invented by whoever owns '+escapeHtml(p.reg)+'.';
-    } else {
-      cap.innerHTML = 'The highlighted part is the whole website: <b>'+escapeHtml(p.reg)+'</b>. Read a web address backwards from the first single slash and you will always find it.';
-    }
-  }
-
-  function renderChecks(list){
-    var ul = el("checks"), i, li, html="";
-    for(i=0;i<list.length;i++){
-      html += '<li><span class="dot '+list[i].level+'"></span><span class="ct">'
-            + '<span class="t">'+list[i].title+'</span>'
-            + (list[i].detail ? '<span class="d">'+list[i].detail+'</span>' : '')
-            + '</span></li>';
-    }
-    ul.innerHTML = html;
-  }
-
-  function worst(list){
-    var i, w="safe";
-    for(i=0;i<list.length;i++){
-      if(list[i].level==="r") return "bad";
-      if(list[i].level==="y") w="warn";
-    }
-    return w;
-  }
-
-  function setVerdict(state, why){
-    var box = el("verdictBox");
-    box.className = "verdict " + state;
-    el("verdictText").textContent = state==="safe" ? "Looks safe" : state==="warn" ? "Be careful" : "Danger signs";
-    el("verdictWhy").innerHTML = why || "";
-  }
-
-  function renderAge(data, regDomain){
-    var box = el("ageBox"), now = new Date(), html="", reg=null, exp=null, registrar="Unknown", dnssec=null, i;
-
-    if(data && data.events){
-      for(i=0;i<data.events.length;i++){
-        if(data.events[i].eventAction==="registration") reg = new Date(data.events[i].eventDate);
-        if(data.events[i].eventAction==="expiration") exp = new Date(data.events[i].eventDate);
-      }
-    }
-    if(data && data.entities){
-      for(i=0;i<data.entities.length;i++){
-        if((data.entities[i].roles||[]).indexOf("registrar")!==-1){
-          var va = data.entities[i].vcardArray;
-          if(va && va[1]){
-            var j; for(j=0;j<va[1].length;j++){ if(va[1][j][0]==="fn") registrar = va[1][j][3]; }
-          }
-        }
-      }
-    }
-    if(data && data.secureDNS) dnssec = !!data.secureDNS.delegationSigned;
-
-    /* Registry status codes. Most are housekeeping ("client transfer prohibited" is just a
-       registrar lock and means nothing bad). A few are only ever imposed when a domain is
-       being pulled out of service, usually after abuse reports. Those are decisive. */
-    var statuses = [], suspBad = false, suspWarn = false;
-    if(data && data.status && data.status.length){
-      var DEADLY = ["serverhold","clienthold","pendingdelete","redemptionperiod","pendingdeleterestored"];
-      for(i=0;i<data.status.length;i++){
-        var raw = String(data.status[i]);
-        statuses.push(raw);
-        var norm = raw.toLowerCase().replace(/[^a-z]/g,"");
-        if(DEADLY.indexOf(norm)!==-1) suspBad = true;
-        if(norm==="inactive") suspWarn = true;
-      }
-    }
-    function worse(base){
-      if(suspBad) return "bad";
-      if(suspWarn && base==="safe") return "warn";
-      return base;
-    }
-
-    if(!reg){
-      box.innerHTML = '<div class="statgrid"><div class="stat"><div class="k">Registry record</div><div class="v">Not published</div></div></div>'
-        + '<p class="caption">The registry that runs <code>'+escapeHtml(regDomain)+'</code> does not publish free RDAP records, so the registration date cannot be looked up from a browser. Several country extensions work this way — most <code>.co.za</code>, <code>.ng</code> and <code>.ke</code> addresses among them. <b>A missing record is not a safe record.</b> Judge this link on the warning signs above, and if it claims to be a local bank or shop, type that company\'s address into your browser yourself instead of clicking.</p>';
-      return "unknown";
-    }
-
-    var ageDays = daysBetween(reg, now);
-    var level, colour, widthPct;
-    if(ageDays < 0){ level="expired"; colour="var(--bad)"; widthPct=100; }
-    else if(ageDays < 30){ level="new"; colour="var(--bad)"; widthPct=Math.max(4,(ageDays/3650)*100); }
-    else if(ageDays < 365){ level="young"; colour="var(--warn)"; widthPct=Math.max(6,(ageDays/3650)*100); }
-    else { level="old"; colour="var(--safe)"; widthPct=Math.min(100,(ageDays/3650)*100); }
-
-    var expDays = exp ? daysBetween(now, exp) : null;
-    var lifetimeDays = exp ? daysBetween(reg, exp) : null;
-
-    html += '<div class="statgrid">';
-    html += '<div class="stat"><div class="k">Registered</div><div class="v">'+escapeHtml(fmtDate(reg.toISOString()))+'</div></div>';
-    html += '<div class="stat"><div class="k">Age</div><div class="v">'+escapeHtml(humanAge(ageDays))+'</div></div>';
-    html += '<div class="stat"><div class="k">Expires</div><div class="v">'+(exp?escapeHtml(fmtDate(exp.toISOString())):"Unknown")+'</div></div>';
-    html += '<div class="stat"><div class="k">Registrar</div><div class="v">'+escapeHtml(registrar||"Unknown")+'</div></div>';
-    html += '<div class="stat"><div class="k">DNSSEC</div><div class="v">'+(dnssec===null?"Unknown":(dnssec?"Enabled":"Not enabled"))+'</div></div>';
-    if(statuses.length){
-      var pretty = statuses.map(function(x){
-        var w = x.replace(/([a-z])([A-Z])/g,"$1 $2").toLowerCase();
-        return w.charAt(0).toUpperCase()+w.slice(1);
-      }).join(" \u00b7 ");
-      html += '<div class="stat" style="grid-column:1/-1"><div class="k">Registry status</div><div class="v" style="color:'+(suspBad?"var(--bad)":suspWarn?"var(--warn)":"inherit")+'">'+escapeHtml(pretty)+'</div></div>';
-    }
-    html += '</div>';
-    html += '<div class="agebar"><i style="width:'+widthPct.toFixed(1)+'%;background:'+colour+'"></i></div>';
-    html += '<p class="caption" style="font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--dimmer)">NEW &#8592; domain age, 10 year scale &#8594; ESTABLISHED</p>';
-
-    if(suspBad){
-      html += '<p class="caption" style="border-left:3px solid var(--bad);padding-left:11px;color:#ffc2c2"><b>This domain has been suspended.</b> Its registry status is <b>'+escapeHtml(statuses.join(", "))+'.</b> Registries and registrars only put a domain into those states to take it out of service &mdash; in practice, after reports of abuse or non-payment, and it is on its way to being deleted. An honest, working business does not sit in this state. Treat this address as hostile, whatever else it looks like.</p>';
-    }
-    if(suspWarn && !suspBad){
-      html += '<p class="caption" style="border-left:3px solid var(--warn);padding-left:11px">The registry lists this domain as <b>'+escapeHtml(statuses.join(", "))+'</b>, meaning it currently has no working nameservers. Sometimes that is a freshly bought domain waiting to be set up &mdash; and sometimes it is a dead one about to be re-registered by somebody else.</p>';
-    }
-
-    var msg;
-    if(level==="expired"){
-      msg = '<b>This domain has already expired.</b> It can be bought by anyone, including somebody who will rebuild the old page as a trap. Do not enter anything here.';
-      html += '<p class="caption">'+msg+'</p>'; box.innerHTML=html; return worse("bad");
-    }
-    if(level==="new"){
-      msg = '<b>Registered '+humanAge(ageDays)+'.</b> Most blocklisted phishing domains are less than a month old, because attackers buy them cheap, use them for a few weeks, and abandon them.';
-      if(expDays !== null && lifetimeDays !== null && lifetimeDays <= 400) msg += ' It also expires in '+expDays+' days, which fits a one-off campaign rather than a business.';
-      html += '<p class="caption">'+msg+'</p>'; box.innerHTML=html; return worse("bad");
-    }
-    if(level==="young"){
-      msg = 'Registered '+humanAge(ageDays)+'. New, but not brand new. Legitimate startups sit in this range too, so weigh it against the warning signs above.';
-      html += '<p class="caption">'+msg+'</p>'; box.innerHTML=html; return worse("warn");
-    }
-    msg = 'Registered '+humanAge(ageDays)+'. Established domains are the normal case for real companies. This is not proof of honesty — old domains get hacked too — but it is not a warning sign.';
-    if(expDays !== null && expDays < 45) msg += ' Note that it expires in '+expDays+' days and could change hands.';
-    html += '<p class="caption">'+msg+'</p>'; box.innerHTML=html; return worse("safe");
-  }
-
-  /* ---------- events ---------- */
-  var inflight = false;
-
-  function run(raw){
-    var res = analyse(raw);
-    el("result").classList.add("on");
-    if(!res.ok){ renderChecks(res.findings); setVerdict("warn",""); el("ageBox").innerHTML=""; return; }
-
-    renderAnatomy(res.parsed, res.host);
-    renderChecks(res.findings);
-
-    var base = worst(res.findings);
-    if(res.isIP){ setVerdict("bad","This link points at a bare numeric address with no domain name at all. Treat it as hostile unless you were expecting it."); return; }
-
-    setVerdict(base==="bad"?"bad":base, "");
-    el("ageBox").innerHTML = '<div class="loading">Looking up the public registry record for '+escapeHtml(res.regDomain)+'…</div>';
-
-    if(inflight) return;
-    inflight = true;
-
-    fetch("https://rdap.org/domain/"+encodeURIComponent(res.regDomain), {headers:{"Accept":"application/rdap+json"}})
-      .then(function(r){
-        if(r.status === 404) return null;
-        if(!r.ok) throw new Error("registry "+r.status);
-        return r.json();
-      })
-      .then(function(data){
-        var ageState = renderAge(data, res.regDomain);
-        var finalState = base;
-        if(ageState === "bad") finalState = "bad";
-        else if(ageState === "warn" && finalState === "safe") finalState = "warn";
-
-        var reds = res.findings.filter(function(f){return f.level==="r";}).length;
-        var yels = res.findings.filter(function(f){return f.level==="y";}).length;
-        var why;
-        if(finalState === "bad"){
-          why = reds
-            ? "Found "+reds+" serious warning sign"+(reds===1?"":"s")+" in the address itself"+(ageState==="bad"?", and the domain is either brand new or already expired":"")+"."
-            : "The address looks ordinary, but the registry record says the domain is "+(ageState==="bad"?"brand new or expired":"not what it should be")+". That combination is what most phishing links look like.";
-        } else if(finalState === "warn"){
-          why = yels+" thing"+(yels===1?"":"s")+" worth a second look. No serious sign, but do not enter a password here unless you were expecting this message.";
-        } else {
-          why = "No structural warning signs, and the domain has an established public registration record. Still not a guarantee — see what this tool cannot tell you below.";
-        }
-        setVerdict(finalState, why);
-        inflight = false;
-      })
-      .catch(function(){
-        el("ageBox").innerHTML = '<div class="statgrid"><div class="stat"><div class="k">Registry record</div><div class="v">Lookup failed</div></div></div>'
-          + '<p class="caption">The public registry directory could not be reached from your browser right now. This can happen on some networks and ad blockers. The warning-sign checks above still ran and are still valid.</p>';
-        inflight = false;
-      });
-  }
-
-  el("f").addEventListener("submit", function(e){
-    e.preventDefault();
-    run(el("u").value);
-    var r = el("result");
-    if(r.scrollIntoView) r.scrollIntoView({behavior:"smooth", block:"start"});
-  });
-
-  var ex = document.querySelectorAll("[data-ex]"), i;
-  for(i=0;i<ex.length;i++){
-    ex[i].addEventListener("click", function(){
-      el("u").value = this.getAttribute("data-ex");
-      run(this.getAttribute("data-ex"));
-      el("result").scrollIntoView({behavior:"smooth", block:"start"});
-    });
-  }
-
-  /* allow ?check=... so the tool works from a shared link */
-  try{
-    var q = new URLSearchParams(location.search).get("check");
-    if(q){ el("u").value = q; run(q); }
-  }catch(e){}
-})();
-</script>
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Selected work</div>
+          <h2>Projects built by doing.</h2>
+          <p class="section-intro">A few practical projects where I explored software, cloud infrastructure and security—then documented what I learned.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-head">
+              <span class="project-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5z"/><path d="m4.5 7.7 7.5 4.4 7.5-4.4M12 12.2V21M8 5.2l8 4.6"/></svg>
+              </span><span class="project-number">01 / IaC</span>
+            </div>
+            <h3>S3 Buckets with Terraform</h3>
+            <p>Built a repeatable infrastructure workflow to provision and configure an S3 bucket, with public-access protections and resource tagging.</p>
+            <div class="tags"><span class="tag">Terraform</span><span class="tag">AWS S3</span><span class="tag">Infrastructure as Code</span></div>
+            <div class="project-links">
+              <a class="text-link" href="assets/projects/create-s3-buckets-with-terraform.pdf" target="_blank" rel="noopener">Read the project <span>↗</span></a>
+              <a class="text-link subtle" href="https://github.com/LuuMost/create-s3-buckets-with-terraform" target="_blank" rel="noopener">GitHub <span>↗</span></a>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-head">
+              <span class="project-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3 20 6v5.5c0 4.6-3.1 7.8-8 9.5-4.9-1.7-8-4.9-8-9.5V6z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg>
+              </span><span class="project-number">02 / Security</span>
+            </div>
+            <h3>Cloud Security with IAM &amp; EC2</h3>
+            <p>Designed and tested IAM access boundaries so an intern could manage development instances while production actions were denied.</p>
+            <div class="tags"><span class="tag">AWS IAM</span><span class="tag">Amazon EC2</span><span class="tag">Least privilege</span></div>
+            <div class="project-links">
+              <a class="text-link" href="assets/projects/cloud-security-with-aws-iam.pdf" target="_blank" rel="noopener">Read the project <span>↗</span></a>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-head">
+              <span class="project-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 8h17M7 6h.01M10 6h.01M8 12h8M8 15.5h5"/></svg>
+              </span><span class="project-number">03 / Web</span>
+            </div>
+            <h3>Static Website Hosting on S3</h3>
+            <p>Hosted a static site, configured object access, traced a 403 error to permissions, and explored a bucket-policy rule to protect the index file.</p>
+            <div class="tags"><span class="tag">Amazon S3</span><span class="tag">Static web</span><span class="tag">Bucket policy</span></div>
+            <div class="project-links">
+              <a class="text-link" href="assets/projects/host-a-website-on-amazon-s3.pdf" target="_blank" rel="noopener">Read the project <span>↗</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="wrap experience-grid">
+        <div class="experience-aside">
+          <div class="eyebrow">Experience</div>
+          <h2>Learning by building with a team.</h2>
+          <p>Hands-on work has helped me connect the code, infrastructure and people behind a working system.</p>
+          <div class="mini-callout">I like to investigate the problem, test a practical fix, verify the result, and write down what happened.</div>
+        </div>
+        <article class="experience-card">
+          <div class="experience-top">
+            <div><h3 class="role-title">Intern</h3><div class="company">CycloSec · Remote</div></div>
+            <div class="date">Aug 2026 — Jan 2027</div>
+          </div>
+          <p>Supported a security event-streaming test environment, contributing to infrastructure setup, validation and technical reporting.</p>
+          <ul>
+            <li>Provisioned an Ubuntu cloud VM and configured Docker-based services for a telemetry test environment.</li>
+            <li>Deployed and verified Redpanda and Redis, created topics, and tested producer/consumer delivery and dead-letter handling.</li>
+            <li>Investigated a broker compatibility issue through logs and API-version tests, then applied and verified a fix.</li>
+            <li>Prepared structured progress reports and helped evaluate intern candidates’ project understanding and communication.</li>
+          </ul>
+          <div class="tags" style="margin-top:22px;margin-bottom:0"><span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">Redpanda</span><span class="tag">Redis</span><span class="tag">Troubleshooting</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">A little about me</div>
+          <h2>Software first. Systems aware.</h2>
+          <p class="section-intro">I’m studying Computer Systems Engineering and growing toward professional software development. My infrastructure and security experience helps me think beyond the screen: how a product runs, connects and stays dependable.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-card">
+            <h3>Education &amp; learning</h3>
+            <div class="education-row">
+              <strong>Diploma in Computer Systems Engineering · NQF Level 6</strong>
+              <span>Tshwane University of Technology, Pretoria · 2024–2027 expected</span>
+              <span>Coursework: computer networks, operating systems, Python/C++ programming, digital systems.</span>
+            </div>
+            <h3 style="margin-top:23px">Certifications &amp; programmes</h3>
+            <ul class="list-clean">
+              <li>FNB App Academy 2026 — JavaScript, React, Firebase, Tailwind CSS, GitHub, APIs and UX design</li>
+              <li>IBM Skills Network — SQL and Relational Databases 101</li>
+              <li>MTN Skills Academy — Generative AI</li>
+              <li>Google Skillshop — AI-Powered Performance Ads Certification</li>
+            </ul>
+          </div>
+          <div class="about-card">
+            <h3>Tools &amp; strengths</h3>
+            <div class="skill-groups">
+              <div class="skill-group"><strong>Development</strong><span>JavaScript, React, Python, SQL, C++, Firebase, Tailwind CSS</span></div>
+              <div class="skill-group"><strong>Cloud &amp; systems</strong><span>AWS (S3, IAM, EC2), Terraform, Docker, Linux, Redis, Redpanda/Kafka basics, AWS CLI</span></div>
+              <div class="skill-group"><strong>Foundations</strong><span>Git/GitHub, APIs, TCP/IP, DNS, DHCP, JSON, troubleshooting</span></div>
+              <div class="skill-group"><strong>Languages</strong><span>English, Tshivenda, isiZulu</span></div>
+              <div class="skill-group"><strong>How I work</strong><span>Documentation, problem-solving, remote collaboration, clear communication</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="contact-panel">
+          <div class="contact-content">
+            <div class="eyebrow">Contact</div>
+            <h2>Have a role or a good problem?</h2>
+            <p>I’m open to junior software developer opportunities, internships and graduate roles. If my background could be a fit, I’d be glad to connect.</p>
+            <div class="button-row">
+              <a class="button button-primary" href="mailto:rlutendomudau2005@gmail.com">Email Richard <span class="arrow">↗</span></a>
+              <a class="button button-secondary" href="assets/Richard-Lutendo-Mudau-CV.pdf" target="_blank" rel="noopener">View CV <span class="arrow">↗</span></a>
+            </div>
+            <div class="contact-details">
+              <a href="tel:+27725020458">+27 72 502 0458</a>
+              <a href="https://github.com/LuuMost" target="_blank" rel="noopener">GitHub ↗</a>
+              <a href="https://www.linkedin.com/in/richard-lutendo-mudau-088332271" target="_blank" rel="noopener">LinkedIn ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 Richard Lutendo Mudau · Built with care, HTML and CSS.</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
 </body>
 </html>
